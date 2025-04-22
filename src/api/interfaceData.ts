@@ -22,9 +22,14 @@ export interface IGetMovieDetail {
   genres: IGenre[];
   original_title: string;
   overview: string;
-  production_companies: IProductionCompany[];
-  release_date: string;
-  runtime: number;
+  production_companies?: IProductionCompany[];
+  release_date?: string;
+  runtime?: number;
+  last_episode_to_air?: {
+    season_number?: number;
+    runtime?: number;
+  };
+  episode_run_time?: number[];
 }
 
 export interface IGenre {

@@ -3,6 +3,7 @@ import { getMovies } from "api/api";
 import { IGetResults } from "api/interfaceData";
 import styled from "styled-components";
 import { makeImagePath } from "utils/utils";
+import { Loader } from "./Loader";
 
 // styled-components
 const Wrapper = styled.div<{ $bgPhoto: string }>`
@@ -14,13 +15,6 @@ const Wrapper = styled.div<{ $bgPhoto: string }>`
   background-image: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1)),
     url(${(props) => props.$bgPhoto});
   background-size: cover;
-`;
-
-const Loader = styled.div`
-  height: 20vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Title = styled.h2`
@@ -57,7 +51,7 @@ function Banner({ queryName, queryId, queryUrl }: IBannerProps) {
   return (
     <Wrapper $bgPhoto={makeImagePath(randomMovies?.backdrop_path || "")}>
       {isLoading ? (
-        <Loader>Loading...</Loader>
+        <Loader />
       ) : (
         <>
           <Title>{randomMovies?.title || randomMovies?.name}</Title>

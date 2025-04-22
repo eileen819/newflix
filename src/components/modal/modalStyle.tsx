@@ -19,18 +19,37 @@ export const BigMovie = styled(motion.div)`
   height: 75vh;
   inset: 0;
   margin: auto;
-  background-color: ${(props) => props.theme.black.darker};
+  background-color: ${(props) => props.theme.black.deepDark};
   border-radius: 15px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 `;
 
+export const BigMovieWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 56.25%;
+`;
+
+export const BigMovieCover = styled.div`
+  background: linear-gradient(
+    transparent 40%,
+    ${(props) => props.theme.black.darker}
+  );
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`;
+
 export const BigCover = styled(motion.div)<{ $bgPhoto: string }>`
   width: 100%;
   height: 350px;
   background-image: linear-gradient(
-      transparent 50%,
+      transparent 30%,
       ${(props) => props.theme.black.darker}
     ),
     url(${(props) => props.$bgPhoto});
@@ -43,7 +62,7 @@ export const BigTitle = styled.h2`
   font-size: 28px;
   font-weight: 400;
   position: absolute;
-  bottom: 30%;
+  bottom: 40%;
   padding: 0 20px;
 `;
 
@@ -51,8 +70,8 @@ export const BigDetail = styled.div`
   width: 100%;
   height: 150px;
   position: absolute;
-  top: 70%;
-  padding: 0 20px;
+  bottom: 20px;
+  padding: 0 20px 20px 20px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -69,6 +88,8 @@ export const BigDetail = styled.div`
 `;
 
 export const GenreWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
   span {
     padding: 0px 10px;
     border-right: 1px solid white;
@@ -79,7 +100,20 @@ export const GenreWrapper = styled.div`
   }
 `;
 
+export const ReleaseWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 5px;
+  span {
+    line-height: 1.3;
+  }
+`;
+
+export const RunTimeWrapper = styled(ReleaseWrapper)``;
+
 export const BigOverview = styled.p`
   color: ${(props) => props.theme.white.lighter};
   font-size: 16px;
+  padding-top: 10px;
 `;

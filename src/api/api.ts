@@ -29,3 +29,13 @@ export async function getMovieDetail(media: string, movieId: string) {
     console.log(error);
   }
 }
+
+export async function getMovieVideo(media: string, movieId: string) {
+  if (!movieId) throw new Error("movieId is undefined");
+  try {
+    const response = await movieInstance.get(`/${media}/${movieId}/videos`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}

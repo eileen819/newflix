@@ -75,6 +75,7 @@ export default function Row({
             slidesPerView={6}
             slidesPerGroup={6}
             spaceBetween={5}
+            loop={true}
             onSwiper={(swiper: SwiperType) => (swiperRef.current = swiper)}
           >
             {data?.results.slice(0, 18).map((movie, i) => (
