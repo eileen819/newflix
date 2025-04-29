@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { generateUniqueId, makeImagePath } from "utils/utils";
 import { Card, CardImg, Info } from "./boxStyle";
+import { useNavigate } from "react-router-dom";
 
 const boxVariants = {
   normal: (index: number) => ({
@@ -36,12 +37,13 @@ const infoVariants = {
 
 interface IBoxProps {
   id: number;
-  index: number;
-  queryId: string;
-  backdrop_path: string;
-  poster_path: string;
+  index?: number;
+  queryId?: string;
+  backdrop_path?: string;
+  poster_path?: string;
   title?: string;
   name?: string;
+  media?: string;
 }
 
 export default function Box({
@@ -58,7 +60,7 @@ export default function Box({
   return (
     <Card
       custom={index}
-      layoutId={generateUniqueId(queryId, id)}
+      layoutId={generateUniqueId(queryId!, id)}
       variants={boxVariants}
       initial="normal"
       whileHover="hover"
@@ -69,7 +71,12 @@ export default function Box({
       <CardImg
         initial={{ opacity: 1 }}
         exit={{ opacity: 0, transition: { duration: 0.3 } }}
-        $bgPhoto={makeImagePath(backdrop_path || poster_path, "w500")}
+        $bgPhoto={
+          backdrop_path || poster_path
+            ? makeImagePath(backdrop_path! || poster_path!, "w500")
+            : null
+        }
+        $bgTitle={backdrop_path === null && poster_path === null ? title! : ""}
       />
       {/* <AnimatePresence>
         {isClicked !== id && (

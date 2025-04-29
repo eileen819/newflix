@@ -4,13 +4,31 @@ import styled from "styled-components";
 export const Card = styled(motion.div)`
   height: 150px;
   cursor: pointer;
+  /* position: relative; */
 `;
 
-export const CardImg = styled(motion.div)<{ $bgPhoto: string }>`
-  background-image: url(${(props) => props.$bgPhoto});
+interface ICardImgProps {
+  $bgPhoto: string | null;
+  $bgTitle: string;
+}
+
+export const CardImg = styled(motion.div)<ICardImgProps>`
+  background: ${(props) =>
+    props.$bgPhoto ? `url(${props.$bgPhoto})` : "#800000"};
   background-size: cover;
   background-position: center;
   height: 150px;
+
+  &::before {
+    content: "${(props) => props.$bgTitle}";
+    display: block;
+    font-size: 30px;
+    padding: 20px;
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+  }
 `;
 
 export const Info = styled(motion.div)<{ $isHovered: boolean }>`

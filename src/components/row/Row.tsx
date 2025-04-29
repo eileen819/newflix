@@ -54,12 +54,10 @@ export default function Row({
     }
   };
 
-  const handleModal = (id: number, queryName: string) => {
-    if (queryName === "tv") {
-      navigate(`/tv/${id}`);
-    } else {
-      navigate(`/movies/${id}`);
-    }
+  const handleModal = (media: string, id: number) => {
+    const params = new URLSearchParams();
+    params.set("id", String(id));
+    navigate(`/${media}?${params.toString()}`);
     setShowModal(true);
     setIsClickedBox(id);
   };
@@ -71,6 +69,7 @@ export default function Row({
       ) : (
         <>
           <Title>{title}</Title>
+
           <StyledSwiper
             slidesPerView={6}
             slidesPerGroup={6}
@@ -81,12 +80,13 @@ export default function Row({
             {data?.results.slice(0, 18).map((movie, i) => (
               <StyledSwiperSlide
                 key={`${queryId}_${i}_${movie.id}`}
-                onClick={() => handleModal(movie.id, queryName)}
+                onClick={() => handleModal(queryName, movie.id)}
               >
                 <Box {...movie} index={i} queryId={queryId} />
               </StyledSwiperSlide>
             ))}
           </StyledSwiper>
+
           <NavBtn $position="prev" onClick={() => handleNavigation("PREV")}>
             {"<"}
           </NavBtn>

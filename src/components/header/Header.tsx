@@ -6,6 +6,7 @@ import {
   useScroll,
   motion,
 } from "framer-motion";
+import SearchBar from "./SearchBar";
 
 const logoVariants = {
   normal: {
@@ -76,7 +77,9 @@ export default function Header() {
           </Item>
         </Items>
       </Col>
-      <Col>{/* <SearchBar /> */}</Col>
+      <Col>
+        <SearchBar />
+      </Col>
     </Nav>
   );
 }

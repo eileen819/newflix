@@ -10,6 +10,7 @@ import {
   BigMovieWrapper,
   BigOverview,
   BigTitle,
+  DetailWrapper,
   GenreWrapper,
   Overlay,
   ReleaseWrapper,
@@ -21,13 +22,14 @@ import YouTube from "react-youtube";
 import { IoIosTimer } from "react-icons/io";
 import { MdCategory, MdOutlineNewReleases } from "react-icons/md";
 import { Loader } from "components/Loader";
+import { IResultProps } from "pages/search";
 
 // interface
 interface IMovieModalProp {
-  queryName: string;
-  queryId: string;
-  movie: IResult;
-  clickedId: number;
+  queryName?: string;
+  queryId?: string;
+  movie?: IResult | IResultProps | null;
+  clickedId?: number | null;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -35,6 +37,7 @@ interface IMovieVideo {
   key: string;
   name: string;
   site: string;
+  type: string;
 }
 
 interface IMovieVideosProp {
@@ -53,9 +56,7 @@ export default function Modal({
   const navigate = useNavigate();
   const onOverlayClick = () => {
     setShowModal(false);
-    if (location.pathname !== "/") {
-      navigate(-1);
-    }
+    navigate(-1);
   };
 
   const media = queryName === "movies" ? "movie" : "tv";
@@ -72,16 +73,21 @@ export default function Modal({
     });
 
   const trailerKey = (video: IMovieVideosProp) => {
-    if (video) {
-      const official = video.results.find(
-        (v) => v.name === "Official Trailer" && v.site === "YouTube"
-      );
-      if (official) return official.key;
-      const anyTrailer = video.results.find(
-        (v) => v.name.includes("Trailer") && v.site === "YouTube"
-      );
-      return anyTrailer?.key;
-    }
+    if (video.results.length === 0) return;
+
+    const official = video.results.find(
+      (v) => v.name === "Official Trailer" && v.site === "YouTube"
+    );
+    if (official) return official.key;
+
+    const anyTrailer = video.results.find(
+      (v) =>
+        (v.name.includes("Trailer") ||
+          v.type.includes("Trailer") ||
+          v.type.includes("Teaser")) &&
+        v.site === "YouTube"
+    );
+    return anyTrailer?.key;
   };
   const trailerId = movieVideos ? trailerKey(movieVideos) : null;
   const isLoading = detailLoading || videoLoading;
@@ -101,7 +107,7 @@ export default function Modal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3, type: "tween" }}
-          layoutId={generateUniqueId(queryId!, clickedId)}
+          layoutId={generateUniqueId(queryId!, clickedId!)}
         >
           {trailerId ? (
             <BigMovieWrapper>
@@ -132,39 +138,62 @@ export default function Modal({
               <BigMovieCover />
             </BigMovieWrapper>
           ) : (
-            <BigCover $bgPhoto={makeImagePath(movie?.backdrop_path || "")} />
+            <BigCover
+              $bgPhoto={makeImagePath(
+                movie?.backdrop_path || data?.poster_path || ""
+              )}
+            />
           )}
-
-          <BigTitle>
-            {movie?.title || movie?.name || data?.original_title}
-          </BigTitle>
-          <BigDetail>
-            <GenreWrapper>
-              <MdCategory />
-              {data?.genres.map((genre) => (
-                <span key={genre.id}>{genre.name}</span>
-              ))}
-            </GenreWrapper>
-            <ReleaseWrapper>
-              <MdOutlineNewReleases size={18} />
-              {data?.release_date ? (
-                <span>{data?.release_date}</span>
-              ) : (
-                <span>SEASON {data?.last_episode_to_air?.season_number}</span>
-              )}
-            </ReleaseWrapper>
-            <RunTimeWrapper>
-              <IoIosTimer size={18} />
-              {data?.runtime ? (
-                <span>{data?.runtime}m</span>
-              ) : data?.episode_run_time?.length !== 0 ? (
-                <span>Last episode {data?.episode_run_time}m</span>
-              ) : (
-                <span>Last episode {data?.last_episode_to_air?.runtime}m</span>
-              )}
-            </RunTimeWrapper>
-            <BigOverview>{movie?.overview || data?.overview}</BigOverview>
-          </BigDetail>
+          <DetailWrapper>
+            <BigTitle>
+              {movie?.title || data?.original_name || data?.original_title}
+            </BigTitle>
+            <BigDetail>
+              <GenreWrapper>
+                {data?.genres.length !== 0 ? (
+                  <>
+                    <MdCategory />
+                    {data?.genres.map((genre) => (
+                      <span key={genre.id}>{genre.name}</span>
+                    ))}
+                  </>
+                ) : null}
+              </GenreWrapper>
+              <ReleaseWrapper>
+                <MdOutlineNewReleases size={18} />
+                {data?.release_date ? (
+                  <span>{data?.release_date}</span>
+                ) : (
+                  <span>
+                    {data?.seasons &&
+                    data.seasons.length > 0 &&
+                    data.seasons[data.seasons.length - 1].season_number !== 0
+                      ? "SEASON " +
+                        data.seasons[data.seasons.length - 1].season_number +
+                        ": "
+                      : ""}
+                    {data?.seasons
+                      ? data?.seasons[data.seasons?.length - 1].episode_count +
+                        " Episodes"
+                      : ""}
+                  </span>
+                )}
+              </ReleaseWrapper>
+              <RunTimeWrapper>
+                <IoIosTimer size={18} />
+                {data?.runtime ? (
+                  <span>{data?.runtime}m</span>
+                ) : data?.episode_run_time?.length !== 0 ? (
+                  <span>Last episode {data?.episode_run_time}m</span>
+                ) : (
+                  <span>
+                    Last episode {data?.last_episode_to_air?.runtime}m
+                  </span>
+                )}
+              </RunTimeWrapper>
+              <BigOverview>{movie?.overview || data?.overview}</BigOverview>
+            </BigDetail>
+          </DetailWrapper>
         </BigMovie>
       ) : (
         <Loader />

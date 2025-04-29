@@ -17,10 +17,22 @@ export interface IGetResults {
   total_results: number;
 }
 
+export interface ISeasons {
+  season_number?: number;
+  episode_count?: number;
+  name?: string;
+  overview?: string;
+}
+
+export interface IGenre {
+  id: number;
+  name: string;
+}
 export interface IGetMovieDetail {
   adult: boolean;
   genres: IGenre[];
   original_title: string;
+  original_name?: string;
   overview: string;
   production_companies?: IProductionCompany[];
   release_date?: string;
@@ -30,12 +42,13 @@ export interface IGetMovieDetail {
     runtime?: number;
   };
   episode_run_time?: number[];
+  backdrop_path?: string;
+  poster_path?: string;
+  name?: string;
+  first_air_date?: string;
+  seasons?: ISeasons[];
 }
 
-export interface IGenre {
-  id: number;
-  name: string;
-}
 export interface IProductionCompany {
   id: number;
   logo_path: string;

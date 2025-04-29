@@ -1,9 +1,6 @@
 import requests from "api/requests";
 import Banner from "components/Banner";
-import Modal from "components/modal/Modal";
 import Row from "components/row/Row";
-import { AnimatePresence } from "framer-motion";
-import { useMatch } from "react-router-dom";
 import styled from "styled-components";
 
 const Wrapper = styled.div`

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 const TOKEN = import.meta.env.VITE__MOVIEDB_TOKEN;
 const BASE_PATH = "https://api.themoviedb.org/3";
@@ -37,5 +37,21 @@ export async function getMovieVideo(media: string, movieId: string) {
     return response.data;
   } catch (error) {
     console.log(error);
+  }
+}
+
+export async function getSearchResults(media: string, keyword: string) {
+  if (!keyword.trim()) return null;
+  try {
+    const response = await movieInstance.get(`/search/${media}`, {
+      params: {
+        query: keyword,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    const err = error as AxiosError;
+    console.error("TMDB 검색 에러:", err.message);
+    throw new Error("검색 요청에 실패했습니다.");
   }
 }

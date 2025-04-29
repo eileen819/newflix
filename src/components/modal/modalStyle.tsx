@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 
 export const Overlay = styled(motion.div)`
-  z-index: 2;
+  z-index: 999;
   position: fixed;
   top: 0;
   left: 0;
@@ -57,12 +57,24 @@ export const BigCover = styled(motion.div)<{ $bgPhoto: string }>`
   background-position: center center;
 `;
 
+export const DetailWrapper = styled.div`
+  background-image: linear-gradient(
+    transparent 5%,
+    ${(props) => props.theme.black.darker}
+  );
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: -200px;
+`;
+
 export const BigTitle = styled.h2`
   color: ${(props) => props.theme.white.lighter};
   font-size: 28px;
   font-weight: 400;
   position: absolute;
-  bottom: 40%;
+  top: 70px;
+  /* bottom: 40%; */
   padding: 0 20px;
 `;
 
@@ -70,7 +82,8 @@ export const BigDetail = styled.div`
   width: 100%;
   height: 150px;
   position: absolute;
-  bottom: 20px;
+  top: 150px;
+  /* bottom: 100px; */
   padding: 0 20px 20px 20px;
   overflow-y: auto;
   display: flex;
