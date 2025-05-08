@@ -20,32 +20,32 @@ export default function Home() {
   return (
     <Wrapper>
       <Banner
-        queryName="movies"
+        queryName="movie"
         queryId="nowPlaying"
         queryUrl={requests.getNowPlayingMovies}
       />
       <SlideWrapper>
         <Row
           title="Trending Movies"
-          queryName="movies"
+          queryName="movie"
           queryId="trending"
           queryUrl={requests.getTrendingMovies}
         />
         <Row
           title="Popular Movies"
-          queryName="movies"
+          queryName="movie"
           queryId="popular"
           queryUrl={requests.getPopularMovies}
         />
         <Row
           title="Upcomig Movies"
-          queryName="movies"
+          queryName="movie"
           queryId="upcoming"
           queryUrl={requests.getUpcomingMovies}
         />
         <Row
           title="Top Rated Movies"
-          queryName="movies"
+          queryName="movie"
           queryId="topRated"
           queryUrl={requests.getTopRatedMovies}
         />

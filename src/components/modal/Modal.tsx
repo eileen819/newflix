@@ -59,7 +59,7 @@ export default function Modal({
     navigate(-1);
   };
 
-  const media = queryName === "movies" ? "movie" : "tv";
+  const media = queryName === "movie" ? "movie" : "tv";
 
   const { isLoading: detailLoading, data } = useQuery<IGetMovieDetail>({
     queryKey: ["detail", queryId, clickedId],

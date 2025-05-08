@@ -18,6 +18,7 @@ export const CardImg = styled(motion.div)<ICardImgProps>`
   background-size: cover;
   background-position: center;
   height: 150px;
+  overflow: hidden;
 
   &::before {
     content: "${(props) => props.$bgTitle}";
@@ -25,10 +26,6 @@ export const CardImg = styled(motion.div)<ICardImgProps>`
     font-size: 18px;
     font-weight: 400;
     padding: 20px;
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
   }
 `;
 
