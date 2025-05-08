@@ -72,6 +72,8 @@ export default function Modal({
       queryFn: () => getMovieVideo(media, String(clickedId)),
     });
 
+  console.log(data, movieVideos);
+
   const trailerKey = (video: IMovieVideosProp) => {
     if (video.results.length === 0) return;
 
@@ -183,11 +185,15 @@ export default function Modal({
                 <IoIosTimer size={18} />
                 {data?.runtime ? (
                   <span>{data?.runtime}m</span>
-                ) : data?.episode_run_time?.length !== 0 ? (
-                  <span>Last episode {data?.episode_run_time}m</span>
+                ) : data?.episode_run_time?.length === 0 &&
+                  data?.last_episode_to_air?.runtime === null ? (
+                  ""
                 ) : (
                   <span>
-                    Last episode {data?.last_episode_to_air?.runtime}m
+                    Last episode{" "}
+                    {data?.episode_run_time ||
+                      data?.last_episode_to_air?.runtime}
+                    m
                   </span>
                 )}
               </RunTimeWrapper>

@@ -22,7 +22,8 @@ export const CardImg = styled(motion.div)<ICardImgProps>`
   &::before {
     content: "${(props) => props.$bgTitle}";
     display: block;
-    font-size: 30px;
+    font-size: 18px;
+    font-weight: 400;
     padding: 20px;
     /* position: absolute;
     top: 50%;

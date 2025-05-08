@@ -40,12 +40,17 @@ export async function getMovieVideo(media: string, movieId: string) {
   }
 }
 
-export async function getSearchResults(media: string, keyword: string) {
+export async function getSearchResults(
+  media: string,
+  keyword: string,
+  pageParam: number = 1
+) {
   if (!keyword.trim()) return null;
   try {
     const response = await movieInstance.get(`/search/${media}`, {
       params: {
         query: keyword,
+        page: pageParam,
       },
     });
     return response.data;
