@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { device } from "style/media";
 import styled from "styled-components";
 
 export const Overlay = styled(motion.div)`
@@ -24,6 +25,16 @@ export const BigMovie = styled(motion.div)`
   overflow: hidden;
   display: flex;
   flex-direction: column;
+
+  @media ${device.tablet} {
+    width: 80vw;
+  }
+  @media ${device.mobileM} {
+    width: 80vw;
+  }
+  @media ${device.mobileS} {
+    width: 90vw;
+  }
 `;
 
 export const BigMovieWrapper = styled.div`
@@ -66,6 +77,18 @@ export const DetailWrapper = styled.div`
   height: 100%;
   position: absolute;
   bottom: -200px;
+
+  @media ${device.tablet} {
+    bottom: -170px;
+  }
+
+  @media ${device.mobileM} {
+    bottom: -170px;
+  }
+
+  @media ${device.mobileS} {
+    /* bottom: -170px; */
+  }
 `;
 
 export const BigTitle = styled.h2`
@@ -76,6 +99,10 @@ export const BigTitle = styled.h2`
   top: 70px;
   /* bottom: 40%; */
   padding: 0 20px;
+
+  @media ${device.mobileS} {
+    font-size: 20px;
+  }
 `;
 
 export const BigDetail = styled.div`
@@ -97,6 +124,10 @@ export const BigDetail = styled.div`
   &::-webkit-scrollbar-thumb {
     background-color: #c80000;
     border-radius: 10px;
+  }
+
+  @media ${device.mobileS} {
+    top: 120px;
   }
 `;
 

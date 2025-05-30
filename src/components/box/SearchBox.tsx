@@ -3,6 +3,7 @@ import Box from "./Box";
 import { Loader } from "components/Loader";
 import { ISearchResultProps } from "pages/search";
 import { InfiniteData } from "@tanstack/react-query";
+import { device } from "style/media";
 
 const SearchWrapper = styled.div`
   margin-bottom: 50px;
@@ -21,12 +22,24 @@ const BoxWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 20px;
+
+  @media ${device.tablet} {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  @media ${device.mobileM} {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media ${device.mobileS} {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const MorePageBtn = styled.button`
   width: 100px;
   height: 40px;
-  border: 2px solid #b00101;
+  border: 1px solid #b00101;
   outline: none;
   border-radius: 30px;
   background-color: #262626;
@@ -42,6 +55,7 @@ const MorePageBtn = styled.button`
 `;
 
 interface ISearchBoxProps {
+  title: string;
   searchData: InfiniteData<ISearchResultProps>;
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
@@ -51,6 +65,7 @@ interface ISearchBoxProps {
 }
 
 export default function SearchBox({
+  title,
   searchData,
   hasNextPage,
   isFetchingNextPage,
@@ -61,7 +76,7 @@ export default function SearchBox({
   let accumulated = 0;
   return (
     <SearchWrapper>
-      <Title>{mediaType === "tv" ? "TV" : "Movie"}</Title>
+      <Title>{title}</Title>
       <BoxWrapper>
         {searchData.pages.map((page) => {
           const elements = page.results.map((media, index) => {

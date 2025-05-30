@@ -23,6 +23,7 @@ import { IoIosTimer } from "react-icons/io";
 import { MdCategory, MdOutlineNewReleases } from "react-icons/md";
 import { Loader } from "components/Loader";
 import { IResultProps } from "pages/search";
+import { useMediaQuery } from "utils/useMediaQuery";
 
 // interface
 interface IMovieModalProp {
@@ -58,6 +59,7 @@ export default function Modal({
     setShowModal(false);
     navigate(-1);
   };
+  const { isMobileS } = useMediaQuery();
 
   const media = queryName === "movie" ? "movie" : "tv";
 
@@ -130,7 +132,7 @@ export default function Modal({
                 }}
                 style={{
                   position: "absolute",
-                  top: -60,
+                  top: isMobileS ? 0 : -60,
                   left: 0,
                   width: "100%",
                   height: "100%",
@@ -155,7 +157,7 @@ export default function Modal({
                 {data?.genres.length !== 0 ? (
                   <>
                     <MdCategory />
-                    {data?.genres.map((genre) => (
+                    {data?.genres.slice(0, 3).map((genre) => (
                       <span key={genre.id}>{genre.name}</span>
                     ))}
                   </>

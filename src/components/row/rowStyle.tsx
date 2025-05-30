@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { device } from "style/media";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -17,9 +18,13 @@ export const Loader = styled.div`
 `;
 
 export const Title = styled.div`
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
   margin-bottom: 10px;
+
+  @media ${device.mobileS} {
+    font-size: 18px;
+  }
 `;
 
 export const StyledSwiper = styled(Swiper)`

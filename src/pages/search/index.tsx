@@ -124,6 +124,7 @@ export default function SearchPage() {
           <>
             {movieData && (
               <SearchBox
+                title="MOVIE"
                 searchData={movieData}
                 hasNextPage={hasMovieNextPage}
                 isFetchingNextPage={isFetchingMovieNextPage}
@@ -134,6 +135,7 @@ export default function SearchPage() {
             )}
             {tvData && (
               <SearchBox
+                title="TV"
                 searchData={tvData}
                 hasNextPage={hasTvNextPage}
                 isFetchingNextPage={isFetchingTvNextPage}

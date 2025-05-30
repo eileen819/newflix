@@ -1,6 +1,7 @@
 import requests from "api/requests";
 import Banner from "components/Banner";
 import Row from "components/row/Row";
+import { device } from "style/media";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -14,6 +15,14 @@ const SlideWrapper = styled.div`
   position: relative;
   bottom: 100px;
   left: 0;
+
+  @media ${device.tablet} {
+    top: 0;
+    bottom: 0;
+  }
+  @media ${device.mobileS} {
+    bottom: 50px;
+  }
 `;
 
 export default function Home() {

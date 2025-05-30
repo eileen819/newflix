@@ -3,15 +3,37 @@ import { generateUniqueId, makeImagePath } from "utils/utils";
 import { Card, CardImg, Info } from "./boxStyle";
 
 const boxVariants = {
-  normal: (index: number) => ({
+  normal: ({
+    index,
+    slidesPerView,
+  }: {
+    index: number;
+    slidesPerView: number;
+  }) => ({
     opacity: 1,
     scale: 1,
-    originX: index % 6 === 0 ? 0 : index % 6 === 5 ? 1 : 0.5,
+    originX:
+      index % slidesPerView === 0
+        ? 0
+        : index % slidesPerView === slidesPerView - 1
+        ? 1
+        : 0.5,
   }),
-  hover: (index: number) => ({
+  hover: ({
+    index,
+    slidesPerView,
+  }: {
+    index: number;
+    slidesPerView: number;
+  }) => ({
     scale: 1.2,
     y: -25,
-    originX: index % 6 === 0 ? 0 : index % 6 === 5 ? 1 : 0.5,
+    originX:
+      index % slidesPerView === 0
+        ? 0
+        : index % slidesPerView === slidesPerView - 1
+        ? 1
+        : 0.5,
     transition: {
       delay: 0.3,
       duration: 0.2,
@@ -43,6 +65,7 @@ interface IBoxProps {
   title?: string;
   name?: string;
   media?: string;
+  slidesPerView?: number;
 }
 
 export default function Box({
@@ -53,6 +76,7 @@ export default function Box({
   poster_path,
   title,
   name,
+  slidesPerView,
 }: IBoxProps) {
   const [isHovered, setIsHovered] = useState(false);
   const bgTitle = () => {
@@ -64,11 +88,11 @@ export default function Box({
 
   return (
     <Card
-      custom={index}
+      custom={{ index, slidesPerView }}
       layoutId={generateUniqueId(queryId!, id)}
       variants={boxVariants}
       initial="normal"
-      whileHover="hover"
+      whileHover={slidesPerView && slidesPerView > 1 ? "hover" : undefined}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       transition={{ type: "tween" }}
@@ -83,15 +107,6 @@ export default function Box({
         }
         $bgTitle={bgTitle()}
       />
-      {/* <AnimatePresence>
-        {isClicked !== id && (
-          <CardImg
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 0.3 } }}
-            $bgPhoto={makeImagePath(backdrop_path || poster_path, "w500")}
-          />
-        )}
-      </AnimatePresence> */}
       <Info variants={infoVariants} $isHovered={isHovered}>
         <h4>{title || name}</h4>
       </Info>

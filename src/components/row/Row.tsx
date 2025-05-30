@@ -16,6 +16,7 @@ import Box from "components/box/Box";
 import Modal from "components/modal/Modal";
 import { AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from "utils/useMediaQuery";
 
 interface IRowProps {
   title: string;
@@ -36,6 +37,7 @@ export default function Row({
   const [showModal, setShowModal] = useState(false);
   const [isClickedBox, setIsClickedBox] = useState<number | null>(null);
   const navigate = useNavigate();
+  const { isMobileS, isMobileM } = useMediaQuery();
 
   const { isLoading, data } = useQuery<IGetResults>({
     queryKey: [queryName, queryId],
@@ -71,10 +73,10 @@ export default function Row({
           <Title>{title}</Title>
 
           <StyledSwiper
-            slidesPerView={6}
-            slidesPerGroup={6}
+            slidesPerView={isMobileS ? 1 : isMobileM ? 3 : 6}
+            slidesPerGroup={isMobileS ? 1 : isMobileM ? 3 : 6}
             spaceBetween={5}
-            loop={true}
+            // loop={true}
             onSwiper={(swiper: SwiperType) => (swiperRef.current = swiper)}
           >
             {data?.results.slice(0, 18).map((movie, i) => (
@@ -82,7 +84,12 @@ export default function Row({
                 key={`${queryId}_${i}_${movie.id}`}
                 onClick={() => handleModal(queryName, movie.id)}
               >
-                <Box {...movie} index={i} queryId={queryId} />
+                <Box
+                  {...movie}
+                  index={i}
+                  queryId={queryId}
+                  slidesPerView={isMobileS ? 1 : isMobileM ? 3 : 6}
+                />
               </StyledSwiperSlide>
             ))}
           </StyledSwiper>

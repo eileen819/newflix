@@ -2,6 +2,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { device } from "style/media";
 import styled from "styled-components";
 
 const Wrapper = styled.form`
@@ -25,11 +26,14 @@ const Input = styled(motion.input)`
   z-index: -1;
   padding: 7px 10px 7px 40px;
   border: 1px solid ${(props) => props.theme.white.darker};
-  border-radius: 3px;
+  border-radius: 10px;
   outline: none;
   background-color: transparent;
-  color: white;
+  color: ${(props) => props.theme.white.darker};
   font-size: 16px;
+
+  @media ${device.mobile} {
+  }
 `;
 
 const Svg = styled(motion.svg)`
@@ -110,7 +114,7 @@ function SearchBar() {
       <Input
         {...register("keyword", {
           required: "검색어를 한 글자 이상 입력해주세요",
-          minLength: 2,
+          minLength: 1,
         })}
         id="search"
         transition={{ ease: "linear" }}
