@@ -59,17 +59,9 @@ Netflix와 유사한 직관적이고 세련된 사용자 경험(UX)을 목표로
 
 ## 🚀 배포 방법
 
-Vercel을 이용해서 배포할 예정
-
-<!--
-아래 내용 참고하기
-이 프로젝트는 Vercel을 통해 정적 웹 사이트로 배포됩니다.
-
-### 📍 배포 방법
-
+- 이 프로젝트는 Vercel을 통해 정적 웹 사이트로 배포됩니다.
 - GitHub Repository를 Vercel에 연동하면 자동 배포 가능
 - 또는 다음 CLI 명령어를 통해 수동 배포 가능
--->
 
 ### 🖥️ 로컬 실행 방법
 
@@ -128,3 +120,5 @@ $ npm run build
 - 콘텐츠 박스에 `variants`를 활용한 hover 애니메이션을 적용하여 사용자에게 직관적인 인터랙션 피드백을 제공
 
 ## 🪪 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

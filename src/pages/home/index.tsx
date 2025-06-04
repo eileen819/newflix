@@ -22,6 +22,7 @@ const SlideWrapper = styled.div`
   }
   @media ${device.mobileS} {
     bottom: 50px;
+    padding: 0 20px;
   }
 `;
 

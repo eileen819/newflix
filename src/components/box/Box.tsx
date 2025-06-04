@@ -28,6 +28,7 @@ const boxVariants = {
   }) => ({
     scale: 1.2,
     y: -25,
+    zIndex: 10,
     originX:
       index % slidesPerView === 0
         ? 0
@@ -48,6 +49,7 @@ const infoVariants = {
   },
   hover: {
     opacity: 1,
+    zIndex: 10,
     transition: {
       delay: 0.3,
       duration: 0.2,

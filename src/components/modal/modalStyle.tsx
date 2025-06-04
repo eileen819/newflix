@@ -20,11 +20,12 @@ export const BigMovie = styled(motion.div)`
   height: 75vh;
   inset: 0;
   margin: auto;
-  background-color: ${(props) => props.theme.black.deepDark};
+  background-color: black;
   border-radius: 15px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-shadow: rgba(63, 66, 71, 0.3) 0px 8px 24px;
 
   @media ${device.tablet} {
     width: 80vw;
@@ -45,10 +46,7 @@ export const BigMovieWrapper = styled.div`
 `;
 
 export const BigMovieCover = styled.div`
-  background: linear-gradient(
-    transparent 40%,
-    ${(props) => props.theme.black.darker}
-  );
+  background: linear-gradient(transparent 1%, black);
   position: absolute;
   top: 0;
   left: 0;
@@ -59,27 +57,18 @@ export const BigMovieCover = styled.div`
 export const BigCover = styled(motion.div)<{ $bgPhoto: string }>`
   width: 100%;
   height: 350px;
-  background-image: linear-gradient(
-      transparent 30%,
-      ${(props) => props.theme.black.darker}
-    ),
-    url(${(props) => props.$bgPhoto});
   background-size: cover;
   background-position: center center;
 `;
 
 export const DetailWrapper = styled.div`
-  background-image: linear-gradient(
-    transparent 5%,
-    ${(props) => props.theme.black.darker}
-  );
   width: 100%;
   height: 100%;
   position: absolute;
-  bottom: -200px;
+  bottom: -180px;
 
   @media ${device.tablet} {
-    bottom: -170px;
+    bottom: -180px;
   }
 
   @media ${device.mobileM} {
@@ -87,7 +76,7 @@ export const DetailWrapper = styled.div`
   }
 
   @media ${device.mobileS} {
-    /* bottom: -170px; */
+    bottom: -200px;
   }
 `;
 
