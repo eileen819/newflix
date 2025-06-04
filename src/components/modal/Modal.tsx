@@ -94,8 +94,6 @@ export default function Modal({
   const trailerId = movieVideos ? trailerKey(movieVideos) : null;
   const isLoading = detailLoading || videoLoading;
 
-  console.log(makeImagePath(data?.backdrop_path));
-
   return (
     <>
       <Overlay
