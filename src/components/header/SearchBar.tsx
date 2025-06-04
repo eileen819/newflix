@@ -67,7 +67,6 @@ function SearchBar() {
   };
 
   const onValid = (data: IForm) => {
-    console.log(data);
     navigate(`/search?keyword=${data.keyword}`);
   };
 

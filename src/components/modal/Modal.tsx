@@ -74,8 +74,6 @@ export default function Modal({
       queryFn: () => getMovieVideo(media, String(clickedId)),
     });
 
-  console.log(data, movieVideos);
-
   const trailerKey = (video: IMovieVideosProp) => {
     if (video.results.length === 0) return;
 

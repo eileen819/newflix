@@ -87,7 +87,6 @@ export default function SearchPage() {
     initialPageParam: 1,
   });
 
-  console.log(movieData);
   const isLoading = movieLoading || tvLoading;
 
   const clickedMedia = (media: string, id: number) => {
@@ -101,7 +100,6 @@ export default function SearchPage() {
 
     setSelectedMedia(selectedData);
   };
-  console.log(tvData);
 
   const handleBoxClick = (media: string, id: number) => {
     setSearchParams((prev) => {
