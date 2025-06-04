@@ -94,6 +94,8 @@ export default function Modal({
   const trailerId = movieVideos ? trailerKey(movieVideos) : null;
   const isLoading = detailLoading || videoLoading;
 
+  console.log(makeImagePath(data?.backdrop_path));
+
   return (
     <>
       <Overlay
@@ -142,7 +144,10 @@ export default function Modal({
           ) : (
             <BigCover
               $bgPhoto={makeImagePath(
-                movie?.backdrop_path || data?.poster_path || ""
+                movie?.backdrop_path ||
+                  data?.poster_path ||
+                  data?.backdrop_path ||
+                  ""
               )}
             />
           )}

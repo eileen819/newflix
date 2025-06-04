@@ -46,7 +46,7 @@ export const BigMovieWrapper = styled.div`
 `;
 
 export const BigMovieCover = styled.div`
-  background: linear-gradient(transparent 1%, black);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
   position: absolute;
   top: 0;
   left: 0;
@@ -57,6 +57,8 @@ export const BigMovieCover = styled.div`
 export const BigCover = styled(motion.div)<{ $bgPhoto: string }>`
   width: 100%;
   height: 350px;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)),
+    url(${(props) => props.$bgPhoto});
   background-size: cover;
   background-position: center center;
 `;
