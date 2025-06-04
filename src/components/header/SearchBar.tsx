@@ -2,7 +2,6 @@ import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { device } from "style/media";
 import styled from "styled-components";
 
 const Wrapper = styled.form`
@@ -31,9 +30,6 @@ const Input = styled(motion.input)`
   background-color: transparent;
   color: ${(props) => props.theme.white.darker};
   font-size: 16px;
-
-  @media ${device.mobile} {
-  }
 `;
 
 const Svg = styled(motion.svg)`
