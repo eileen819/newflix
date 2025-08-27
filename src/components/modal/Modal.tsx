@@ -1,7 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
-import { getMovieDetail, getMovieVideo } from "api/api";
-import { IGetMovieDetail, IResult } from "api/interfaceData";
-// import { useMatch, useNavigate } from "react-router-dom";
+import { IResult } from "api/interfaceData";
 import {
   BigCover,
   BigDetail,
@@ -17,7 +14,7 @@ import {
   Scrim,
   VideoLayer,
 } from "./modalStyle";
-import { generateUniqueId, makeImagePath } from "utils/utils";
+import { generateUniqueId } from "utils/utils";
 import { useNavigate } from "react-router-dom";
 import YouTube from "react-youtube";
 import { IoIosTimer } from "react-icons/io";
@@ -25,7 +22,9 @@ import { MdCategory, MdOutlineNewReleases } from "react-icons/md";
 import { Loader } from "components/Loader";
 import { IResultProps } from "pages/search";
 import { useMediaQuery } from "utils/useMediaQuery";
-import { useEffect, useState } from "react";
+import { useMovieMedia } from "utils/useMovieMedia";
+import { useCoverPreload } from "utils/useCoverPreload";
+import { useYoutubeTrailer } from "utils/useYoutubeTrailer";
 
 // interface
 interface IMovieModalProp {
@@ -36,22 +35,6 @@ interface IMovieModalProp {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-interface IMovieVideo {
-  key: string;
-  name: string;
-  site: string;
-  type: string;
-}
-
-interface IMovieVideosProp {
-  id: number;
-  results: IMovieVideo[];
-}
-
-interface IYoutubeEvent {
-  data: number;
-}
-
 // function
 export default function Modal({
   queryName,
@@ -60,9 +43,6 @@ export default function Modal({
   clickedId,
   setShowModal,
 }: IMovieModalProp) {
-  const [showPlayer, setShowPlayer] = useState(false);
-  const [ytState, setYtState] = useState<number | null>(null);
-
   const navigate = useNavigate();
   const onOverlayClick = () => {
     setShowModal(false);
@@ -70,58 +50,27 @@ export default function Modal({
   };
   const { isMobileS } = useMediaQuery();
 
-  const media = queryName === "movie" ? "movie" : "tv";
-
-  const { isLoading: detailLoading, data } = useQuery<IGetMovieDetail>({
-    queryKey: ["detail", queryId, clickedId],
-    queryFn: () => getMovieDetail(media, String(clickedId)),
-  });
-
-  const { isLoading: videoLoading, data: movieVideos } =
-    useQuery<IMovieVideosProp>({
-      queryKey: ["detail", "video", queryId, clickedId],
-      queryFn: () => getMovieVideo(media, String(clickedId)),
+  const { movieDetail, detailLoading, videoLoading, trailerId, coverSrc } =
+    useMovieMedia({
+      queryName,
+      queryId,
+      clickedId,
+      movie,
     });
 
-  const trailerKey = (video: IMovieVideosProp) => {
-    if (video.results.length === 0) return;
+  const coverLoaded = useCoverPreload(coverSrc);
 
-    const official = video.results.find(
-      (v) => v.name === "Official Trailer" && v.site === "YouTube"
-    );
-    if (official) return official.key;
+  const { handleStateChange, handleReady, showPlayer, hasPlayed } =
+    useYoutubeTrailer({
+      detailLoading,
+      trailerId,
+    });
 
-    const anyTrailer = video.results.find(
-      (v) =>
-        (v.name.includes("Trailer") ||
-          v.type.includes("Trailer") ||
-          v.type.includes("Teaser")) &&
-        v.site === "YouTube"
-    );
-    return anyTrailer?.key;
-  };
-
-  const handleStateChange = (event: IYoutubeEvent) => {
-    console.log(event);
-    const { data } = event;
-    setYtState(data);
-    console.log("YT state:", data);
-  };
-
-  const isPlaying = ytState === 1;
-  const trailerId = movieVideos ? trailerKey(movieVideos) : null;
   const isLoading = detailLoading || videoLoading;
-  const shouldShowCover = !trailerId || !showPlayer || !isPlaying;
+  const shouldShowCover =
+    !trailerId || !showPlayer || !hasPlayed || !coverLoaded;
 
-  useEffect(() => {
-    if (!detailLoading && trailerId) {
-      const delay = setTimeout(() => setShowPlayer(true), 200);
-      return () => clearTimeout(delay);
-    } else {
-      setShowPlayer(false);
-      setYtState(null);
-    }
-  }, [detailLoading, trailerId]);
+  console.log(hasPlayed);
 
   return (
     <>
@@ -145,26 +94,14 @@ export default function Modal({
               <BigCover
                 animate={{ opacity: shouldShowCover ? 1 : 0 }}
                 transition={{ duration: 0.2 }}
-                $bgPhoto={makeImagePath(
-                  movie?.backdrop_path ||
-                    data?.poster_path ||
-                    data?.backdrop_path ||
-                    ""
-                )}
+                $bgPhoto={coverSrc}
               />
               {showPlayer && trailerId && (
                 <VideoLayer>
                   <YouTube
                     videoId={trailerId}
                     onStateChange={handleStateChange}
-                    onReady={(e) => {
-                      try {
-                        e.target.mute();
-                        e.target.playVideo();
-                      } catch {
-                        console.log("onReady error");
-                      }
-                    }}
+                    onReady={handleReady}
                     opts={{
                       width: "100%",
                       height: "100%",
@@ -192,54 +129,18 @@ export default function Modal({
               )}
             </BigMovieWrapper>
             <Scrim />
-            {/* {showPlayer ? (
-              <BigMovieWrapper>
-                <YouTube
-                  videoId={trailerId}
-                  opts={{
-                    width: "100%",
-                    height: "100%",
-                    playerVars: {
-                      autoplay: 1,
-                      loop: 1,
-                      playlist: trailerId,
-                      rel: 0,
-                      modestbranding: 1,
-                      controls: 0,
-                      mute: 1,
-                    },
-                  }}
-                  style={{
-                    position: "absolute",
-                    top: isMobileS ? 0 : -60,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    pointerEvents: "none",
-                  }}
-                />
-                <BigMovieCover />
-              </BigMovieWrapper>
-            ) : (
-              <BigCover
-                $bgPhoto={makeImagePath(
-                  movie?.backdrop_path ||
-                    data?.poster_path ||
-                    data?.backdrop_path ||
-                    ""
-                )}
-              />
-            )} */}
             <DetailWrapper>
               <BigTitle>
-                {movie?.title || data?.original_name || data?.original_title}
+                {movie?.title ||
+                  movieDetail?.original_name ||
+                  movieDetail?.original_title}
               </BigTitle>
               <BigDetail>
                 <GenreWrapper>
-                  {data?.genres.length !== 0 ? (
+                  {movieDetail?.genres.length !== 0 ? (
                     <>
                       <MdCategory />
-                      {data?.genres.slice(0, 3).map((genre) => (
+                      {movieDetail?.genres.slice(0, 3).map((genre) => (
                         <span key={genre.id}>{genre.name}</span>
                       ))}
                     </>
@@ -247,19 +148,21 @@ export default function Modal({
                 </GenreWrapper>
                 <ReleaseWrapper>
                   <MdOutlineNewReleases size={18} />
-                  {data?.release_date ? (
-                    <span>{data?.release_date}</span>
+                  {movieDetail?.release_date ? (
+                    <span>{movieDetail?.release_date}</span>
                   ) : (
                     <span>
-                      {data?.seasons &&
-                      data.seasons.length > 0 &&
-                      data.seasons[data.seasons.length - 1].season_number !== 0
+                      {movieDetail?.seasons &&
+                      movieDetail.seasons.length > 0 &&
+                      movieDetail.seasons[movieDetail.seasons.length - 1]
+                        .season_number !== 0
                         ? "SEASON " +
-                          data.seasons[data.seasons.length - 1].season_number +
+                          movieDetail.seasons[movieDetail.seasons.length - 1]
+                            .season_number +
                           ": "
                         : ""}
-                      {data?.seasons
-                        ? data?.seasons[data.seasons?.length - 1]
+                      {movieDetail?.seasons
+                        ? movieDetail?.seasons[movieDetail.seasons?.length - 1]
                             .episode_count + " Episodes"
                         : ""}
                     </span>
@@ -267,21 +170,23 @@ export default function Modal({
                 </ReleaseWrapper>
                 <RunTimeWrapper>
                   <IoIosTimer size={18} />
-                  {data?.runtime ? (
-                    <span>{data?.runtime}m</span>
-                  ) : data?.episode_run_time?.length === 0 &&
-                    data?.last_episode_to_air?.runtime === null ? (
+                  {movieDetail?.runtime ? (
+                    <span>{movieDetail?.runtime}m</span>
+                  ) : movieDetail?.episode_run_time?.length === 0 &&
+                    movieDetail?.last_episode_to_air?.runtime === null ? (
                     ""
                   ) : (
                     <span>
                       Last episode{" "}
-                      {data?.episode_run_time ||
-                        data?.last_episode_to_air?.runtime}
+                      {movieDetail?.episode_run_time ||
+                        movieDetail?.last_episode_to_air?.runtime}
                       m
                     </span>
                   )}
                 </RunTimeWrapper>
-                <BigOverview>{movie?.overview || data?.overview}</BigOverview>
+                <BigOverview>
+                  {movie?.overview || movieDetail?.overview}
+                </BigOverview>
               </BigDetail>
             </DetailWrapper>
           </>
