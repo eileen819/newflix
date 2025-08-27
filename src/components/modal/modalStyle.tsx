@@ -43,24 +43,44 @@ export const BigMovieWrapper = styled.div`
   width: 100%;
   height: 0;
   padding-top: 56.25%;
-`;
-
-export const BigMovieCover = styled.div`
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  overflow: hidden;
 `;
 
 export const BigCover = styled(motion.div)<{ $bgPhoto: string }>`
-  width: 100%;
-  height: 350px;
+  /* width: 100%;
+  height: 350px; */
   background-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)),
     url(${(props) => props.$bgPhoto});
   background-size: cover;
   background-position: center center;
+
+  position: absolute;
+  inset: 0;
+  z-index: 2; /* 영상보다 위 */
+  pointer-events: none;
+`;
+
+export const VideoLayer = styled.div`
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+`;
+
+// export const BigMovieCover = styled.div`
+//   background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+// `;
+
+export const Scrim = styled.div`
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  /* 예: 반투명 딤 */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
 `;
 
 export const DetailWrapper = styled.div`
@@ -68,6 +88,7 @@ export const DetailWrapper = styled.div`
   height: 100%;
   position: absolute;
   bottom: -180px;
+  z-index: 4;
 
   @media ${device.tablet} {
     bottom: -180px;

@@ -12,7 +12,7 @@ const rotationAnimation = keyframes`
 export const Loader = styled.div`
   width: 48px;
   height: 48px;
-  border: 6px solid #c80000;
+  border: 6px solid #a30202;
   border-bottom-color: transparent;
   border-radius: 50%;
   animation: ${rotationAnimation} 1s linear infinite;

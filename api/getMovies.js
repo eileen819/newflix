@@ -2,12 +2,12 @@ import { movieInstance } from "./movieInstance.js";
 
 export default async function handler(req, res) {
   const { url } = req.query;
-  console.log("🔍 요청된 url:", url);
-  console.log(
-    "🔐 사용된 토큰:",
-    process.env.MOVIEDB_TOKEN?.slice(0, 10),
-    "..."
-  );
+  // console.log("🔍 요청된 url:", url);
+  // console.log(
+  //   "🔐 사용된 토큰:",
+  //   process.env.MOVIEDB_TOKEN?.slice(0, 10),
+  //   "..."
+  // );
 
   if (!url) return res.status(400).json({ error: "URL 파라미터 없음" });
   if (!process.env.MOVIEDB_TOKEN)
