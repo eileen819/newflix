@@ -60,7 +60,7 @@ export default function Modal({
 
   const coverLoaded = useCoverPreload(coverSrc);
 
-  const { handleStateChange, handleReady, showPlayer, hasPlayed } =
+  const { handleStateChange, handleReady, showPlayer, hasPlayed, isReady } =
     useYoutubeTrailer({
       detailLoading,
       trailerId,
@@ -68,7 +68,7 @@ export default function Modal({
 
   const isLoading = detailLoading || videoLoading;
   const shouldShowCover =
-    !trailerId || !showPlayer || !hasPlayed || !coverLoaded;
+    !trailerId || !showPlayer || !hasPlayed || !isReady || !coverLoaded;
 
   console.log(hasPlayed);
 
@@ -99,6 +99,7 @@ export default function Modal({
               {showPlayer && trailerId && (
                 <VideoLayer>
                   <YouTube
+                    key={trailerId}
                     videoId={trailerId}
                     onStateChange={handleStateChange}
                     onReady={handleReady}

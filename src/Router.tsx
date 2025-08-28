@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import Home from "./pages/home";
 import TvPage from "./pages/tv";
 import SearchPage from "./pages/search";
+import Home from "pages/home";
 
 export default function Router() {
   return (
@@ -11,7 +11,7 @@ export default function Router() {
       </Route>
       <Route path="/tv" element={<TvPage key="tv" />} />
       <Route path="/search" element={<SearchPage key="search" />} />
-      <Route path="/*" element={<Navigate replace to="/" />} />
+      <Route path="*" element={<Navigate replace to="/" />} />
     </Routes>
   );
 }

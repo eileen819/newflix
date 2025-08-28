@@ -56,7 +56,7 @@ export const BigCover = styled(motion.div)<{ $bgPhoto: string }>`
 
   position: absolute;
   inset: 0;
-  z-index: 2; /* 영상보다 위 */
+  z-index: 2;
   pointer-events: none;
 `;
 
@@ -79,7 +79,6 @@ export const Scrim = styled.div`
   position: absolute;
   inset: 0;
   z-index: 3;
-  /* 예: 반투명 딤 */
   background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
 `;
 
