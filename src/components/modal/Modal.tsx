@@ -6,6 +6,7 @@ import {
   BigMovieWrapper,
   BigOverview,
   BigTitle,
+  CloseBtn,
   DetailWrapper,
   GenreWrapper,
   Overlay,
@@ -44,7 +45,7 @@ export default function Modal({
   setShowModal,
 }: IMovieModalProp) {
   const navigate = useNavigate();
-  const onOverlayClick = () => {
+  const onCloseModal = () => {
     setShowModal(false);
     navigate(-1);
   };
@@ -60,7 +61,7 @@ export default function Modal({
 
   const coverLoaded = useCoverPreload(coverSrc);
 
-  const { handleStateChange, handleReady, showPlayer, hasPlayed, isReady } =
+  const { handleStateChange, showPlayer, hasPlayed, isReady, handleReady } =
     useYoutubeTrailer({
       detailLoading,
       trailerId,
@@ -70,12 +71,10 @@ export default function Modal({
   const shouldShowCover =
     !trailerId || !showPlayer || !hasPlayed || !isReady || !coverLoaded;
 
-  console.log(hasPlayed);
-
   return (
     <>
       <Overlay
-        onClick={onOverlayClick}
+        onClick={onCloseModal}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -90,6 +89,7 @@ export default function Modal({
       >
         {!isLoading ? (
           <>
+            <CloseBtn onClick={onCloseModal} />
             <BigMovieWrapper>
               <BigCover
                 animate={{ opacity: shouldShowCover ? 1 : 0 }}
@@ -101,14 +101,14 @@ export default function Modal({
                   <YouTube
                     key={trailerId}
                     videoId={trailerId}
-                    onStateChange={handleStateChange}
                     onReady={handleReady}
+                    onStateChange={handleStateChange}
                     opts={{
                       width: "100%",
                       height: "100%",
                       playerVars: {
                         playsinline: 1,
-                        autoplay: 1,
+                        autoplay: 0,
                         loop: 1,
                         playlist: trailerId,
                         rel: 0,

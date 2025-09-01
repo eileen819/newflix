@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { IoIosCloseCircle } from "react-icons/io";
 import { device } from "style/media";
 import styled from "styled-components";
 
@@ -11,6 +12,17 @@ export const Overlay = styled(motion.div)`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
   opacity: 0;
+`;
+
+export const CloseBtn = styled(IoIosCloseCircle)`
+  fill: ${(props) => props.theme.white.darker};
+  font-size: 26px;
+  z-index: 999;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  overflow: hidden;
 `;
 
 export const BigMovie = styled(motion.div)`
@@ -35,6 +47,7 @@ export const BigMovie = styled(motion.div)`
   }
   @media ${device.mobileS} {
     width: 90vw;
+    height: 65vh;
   }
 `;
 
@@ -98,7 +111,7 @@ export const DetailWrapper = styled.div`
   }
 
   @media ${device.mobileS} {
-    bottom: -200px;
+    bottom: -120px;
   }
 `;
 
@@ -137,8 +150,13 @@ export const BigDetail = styled.div`
     border-radius: 10px;
   }
 
+  @media ${device.mobileM} {
+    height: 170px;
+  }
+
   @media ${device.mobileS} {
     top: 120px;
+    height: 170px;
   }
 `;
 

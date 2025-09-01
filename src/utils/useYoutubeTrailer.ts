@@ -22,7 +22,6 @@ export function useYoutubeTrailer(opts: IUseYoutubeTrailerProp) {
     playerRef.current = e.target;
     setIsReady(true);
     try {
-      console.log("[YT] ready");
       e.target.mute?.();
       e.target.playVideo?.();
     } catch {
@@ -52,7 +51,7 @@ export function useYoutubeTrailer(opts: IUseYoutubeTrailerProp) {
   }, [detailLoading, trailerId]);
 
   useEffect(() => {
-    if (
+    /* if (
       !showPlayer ||
       !trailerId ||
       hasPlayed ||
@@ -64,17 +63,13 @@ export function useYoutubeTrailer(opts: IUseYoutubeTrailerProp) {
     const iv = setInterval(() => {
       tries += 1;
       try {
-        console.log("retry playing");
         const p = playerRef.current;
         const state = p.getPlayerState?.();
-        const t = p.getCurrentTime?.(); // 초 단위
-        // 아무 신호나 먼저 오면 hasPlayed 확정
+        const t = p.getCurrentTime?.();
         if (state === 1 || (typeof t === "number" && t > 0.05)) {
           setHasPlayed(true);
           clearInterval(iv);
-          console.log("retry success");
         } else if (tries > 20) {
-          // 20 * 100ms = 2s 한도
           clearInterval(iv);
         }
       } catch {
@@ -82,8 +77,33 @@ export function useYoutubeTrailer(opts: IUseYoutubeTrailerProp) {
       }
     }, 100);
 
-    return () => clearInterval(iv);
+    return () => clearInterval(iv); */
+    if (
+      !showPlayer ||
+      !trailerId ||
+      hasPlayed ||
+      !isReady ||
+      !playerRef.current
+    )
+      return;
+
+    const p = playerRef.current;
+    const t = setTimeout(() => {
+      try {
+        console.log("retry");
+        const state = p.getPlayerState?.(); // -1,0,1,2,3,5
+        const cur = p.getCurrentTime?.(); // seconds
+        if (state === 1 || (typeof cur === "number" && cur > 0.05)) {
+          setHasPlayed(true); // ▶ 커버 내리기
+        }
+        // else: 추가 재시도 없음 (자연 전이 기다림)
+      } catch {
+        // no-op
+      }
+    }, 400); // 300~500ms 권장
+
+    return () => clearTimeout(t);
   }, [showPlayer, trailerId, hasPlayed, isReady]);
 
-  return { showPlayer, handleStateChange, handleReady, hasPlayed, isReady };
+  return { showPlayer, handleStateChange, hasPlayed, handleReady, isReady };
 }
