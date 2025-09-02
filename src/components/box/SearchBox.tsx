@@ -98,6 +98,7 @@ export default function SearchBox({
                   }
                   backdrop_path={media.backdrop_path}
                   poster_path={media.poster_path}
+                  mode="grid"
                 />
               </div>
             );

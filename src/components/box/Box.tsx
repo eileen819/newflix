@@ -58,6 +58,7 @@ const infoVariants = {
   },
 };
 
+type Mode = "slider" | "grid";
 interface IBoxProps {
   id: number;
   index?: number;
@@ -68,6 +69,7 @@ interface IBoxProps {
   name?: string;
   media?: string;
   slidesPerView?: number;
+  mode: Mode;
 }
 
 export default function Box({
@@ -79,8 +81,10 @@ export default function Box({
   title,
   name,
   slidesPerView,
+  mode,
 }: IBoxProps) {
   const [isHovered, setIsHovered] = useState(false);
+
   const bgTitle = () => {
     if (backdrop_path === null && poster_path === null && title) {
       return title.slice(0, 70);
@@ -88,15 +92,18 @@ export default function Box({
     return "";
   };
 
+  const enableHover =
+    mode === "slider" && typeof slidesPerView === "number" && slidesPerView > 1;
+
   return (
     <Card
       custom={{ index, slidesPerView }}
       layoutId={generateUniqueId(queryId!, id)}
       variants={boxVariants}
       initial="normal"
-      whileHover={slidesPerView && slidesPerView > 1 ? "hover" : undefined}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      whileHover={enableHover ? "hover" : undefined}
+      onMouseEnter={enableHover ? () => setIsHovered(true) : undefined}
+      onMouseLeave={enableHover ? () => setIsHovered(false) : undefined}
       transition={{ type: "tween" }}
     >
       <CardImg
@@ -109,9 +116,11 @@ export default function Box({
         }
         $bgTitle={bgTitle()}
       />
-      <Info variants={infoVariants} $isHovered={isHovered}>
-        <h4>{title || name}</h4>
-      </Info>
+      {enableHover && (
+        <Info variants={infoVariants} $isHovered={isHovered}>
+          <h4>{title || name}</h4>
+        </Info>
+      )}
     </Card>
   );
 }

@@ -89,6 +89,7 @@ export default function Row({
                   index={i}
                   queryId={queryId}
                   slidesPerView={isMobileS ? 1 : isMobileM ? 3 : 6}
+                  mode="slider"
                 />
               </StyledSwiperSlide>
             ))}

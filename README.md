@@ -3,12 +3,16 @@
 사이트 주소와 화면 캡쳐해서 넣기  
 🔗 **배포 주소:** [NEWFLIX](https://newflix-eileen.vercel.app/)
 
+  <br/>
+
 ## 📌 프로젝트 개요
 
 - **NEWFLIX**는 TMDB API를 활용하여 **최신 영화와 TV쇼 정보를 실시간으로 제공하는 미디어 플랫폼**입니다.
 - Netflix UI/UX를 재해석한 웹 어플리케이션으로, **TanStack Query(구 React-Query)를 통한 캐싱 전략, 반응형 UI, 애니메이션 전환** 등 최신 프론트엔드 실무 기술을 종합적으로 적용하여 최적의 사용자 경험을 제공하는 데 중점을 두었습니다.
 - 특히 **Vercel Functions 기반 서버리스 API 래핑을 통한 보안 강화, Framer Motion을 활용한 자연스러운 모달 전환 애니메이션, Swiper 기반 캐러셀 UI** 등 다양한 기술을 통합하여 **실제 서비스 수준의 인터랙션과 성능을 구현**했습니다.
 - 본 프로젝트는 단순 학습을 넘어, **데이터 페칭 최적화·UX 개선·UI 애니메이션 설계**와 같은 실무 핵심 과제를 직접 해결하며 프론트엔드 개발 역량을 검증했습니다.
+
+  <br/>
 
 ## 💡 주요 기능
 
@@ -22,7 +26,7 @@
 
 - 영화 및 TV쇼 **통합 검색 기능** 제공
 - `React-Hook-Form`으로 검색 **폼 상태 관리 및 데이터 유효성 검증**
-- `useSearchParams`로 쿼리를 읽어 라우팅과 결과를 동기화하여 **뒤로가기/새로고침/공유 시 동일 결과 복원 지원**
+- 검색 폼 제출 기반 설계로 불필요한 API 호출 방지
 - `Axios` + `TanStack Query`로 **검색 결과 캐싱 및 로딩 상태를 관리**
 
 ### ✅ 상세 정보 모달 제공
@@ -30,6 +34,8 @@
 - 선택한 콘텐츠의 **줄거리, 장르, 평점 등의 상세 정보 제공**
 - `Framer Motion`의 `layoutId`로 **부드럽고 직관적인 모달 전환 애니메이션** 구현
 - `React-Youtube`로 **트레일러 자동 재생 지원**, 트레일러 부재 시 공식 이미지로 대체하여 **Fallback UX 강화**
+
+  <br/>
 
 ## 🔎 역할과 기여도
 
@@ -42,17 +48,21 @@
 - **네트워크 효율 & 보안 강화**: 서버리스 API 래핑으로 API Key 보호 및 안정적 데이터 제공
 - **자동 배포 환경 구축**: Vercel CI/CD 파이프라인을 활용해 커밋 기반 자동 배포 지원
 
+  <br/>
+
 ## 🛠️ 사용한 기술 스택
 
 | 분류                  | 기술/도구                                                                |
 | --------------------- | ------------------------------------------------------------------------ |
 | **Development**       | React, TypeScript, React Router DOM                                      |
-| **State & Data**      | TanStack Query (React Query), Axios, React Hook Form                     |
+| **State & Data**      | TanStack Query (구 React Query), Axios, React Hook Form                  |
 | **UI & Styling**      | styled-components, styled-reset, Swiper, react-icons                     |
 | **Animation**         | Framer Motion, React-Youtube                                             |
 | **API & Data Source** | TMDB API (The Movie Database)                                            |
 | **Serverless/API**    | Vercel Functions (TMDB 프록시/API Key 보안, 헤더 필터링, 요청 쿼터 제어) |
 | **Deployment**        | Vercel (GitHub 연동 CI/CD, 커밋 기반 자동 배포)                          |
+
+  <br/>
 
 ## 📁 프로젝트 구조
 
@@ -112,6 +122,8 @@ api (Vercel Functions(서버리스 API))
  ┣ theme.ts
  ┗ vite-env.d.ts
 ```
+
+  <br/>
 
 ## 🚀 배포 방법
 
@@ -178,22 +190,26 @@ npm run build
 npm run preview
 ```
 
+  <br/>
+
 ## 🔄 개선 예정 기능 (업데이트 계획)
 
-### 찜 기능
+### ✔️ 찜(즐겨찾기) 기능
 
 - 좋아하는 콘텐츠를 저장하고 찜 목록에서 모아보기
 - Firestore 또는 LocalStorage를 활용한 사용자별 데이터 관리와 개인화 경험 강화
 
-### 검색어 자동완성
+### ✔️ 검색어 자동완성
 
 - 검색어 입력 시 관련 영화/TV쇼 자동 추천
 - 디바운싱 기반 API 호출 최적화 및 사용자 검색 이력 결합
 
-### 리뷰 & 댓글 기능
+### ✔️ 리뷰 & 댓글 기능
 
 - 콘텐츠별 리뷰/평점 작성 및 사용자 의견 공유
 - 실시간 데이터 연동 및 사용자 인증 시스템 구축 고려
+
+  <br/>
 
 ## 📚 기술적 학습 및 인사이트
 
@@ -212,6 +228,8 @@ npm run preview
 
 - Vercel Serverless Functions를 통해 TMDB API 프록시 환경을 구성, 클라이언트에서 API Key가 노출되지 않도록 보안 강화
 - 이 과정을 통해 실제 서비스에서도 요구되는 API 보안·확장성 패턴을 학습하고 적용 경험을 축적
+
+  <br/>
 
 ## 🪪 License
 
