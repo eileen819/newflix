@@ -17,38 +17,41 @@ const SlideWrapper = styled.div`
 
 export default function TvPage() {
   return (
-    <Wrapper>
-      <Banner
-        queryName="tv"
-        queryId="airingToday"
-        queryUrl={requests.getAiringTodayTv}
-      />
-      <SlideWrapper>
-        <Row
-          title="On The Air"
+    <>
+      <title>NEWFLIX | TV Series</title>
+      <Wrapper>
+        <Banner
           queryName="tv"
-          queryId="onTheAir"
-          queryUrl={requests.getOnTheAirTv}
+          queryId="airingToday"
+          queryUrl={requests.getAiringTodayTv}
         />
-        <Row
-          title="Trending TV shows"
-          queryName="tv"
-          queryId="trending"
-          queryUrl={requests.getTrendingTv}
-        />
-        <Row
-          title="Top rated TV shows"
-          queryName="tv"
-          queryId="topRated"
-          queryUrl={requests.gettopRatedTv}
-        />
-        <Row
-          title="Popular TV shows"
-          queryName="tv"
-          queryId="popular"
-          queryUrl={requests.getPopularTv}
-        />
-      </SlideWrapper>
-    </Wrapper>
+        <SlideWrapper>
+          <Row
+            title="On The Air"
+            queryName="tv"
+            queryId="onTheAir"
+            queryUrl={requests.getOnTheAirTv}
+          />
+          <Row
+            title="Trending TV shows"
+            queryName="tv"
+            queryId="trending"
+            queryUrl={requests.getTrendingTv}
+          />
+          <Row
+            title="Top rated TV shows"
+            queryName="tv"
+            queryId="topRated"
+            queryUrl={requests.gettopRatedTv}
+          />
+          <Row
+            title="Popular TV shows"
+            queryName="tv"
+            queryId="popular"
+            queryUrl={requests.getPopularTv}
+          />
+        </SlideWrapper>
+      </Wrapper>
+    </>
   );
 }

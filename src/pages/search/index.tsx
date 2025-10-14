@@ -114,49 +114,52 @@ export default function SearchPage() {
   };
 
   return (
-    <Wrapper>
-      {!isLoading ? (
-        movieData?.pages.length === 0 && tvData?.pages.length === 0 ? (
-          <div>검색결과가 없습니다.</div>
-        ) : (
-          <>
-            {movieData && (
-              <SearchBox
-                title="MOVIE"
-                searchData={movieData}
-                hasNextPage={hasMovieNextPage}
-                isFetchingNextPage={isFetchingMovieNextPage}
-                handleBoxClick={handleBoxClick}
-                fetchNextPage={() => fetchMovieNextPage()}
-                mediaType="movie"
-              />
-            )}
-            {tvData && (
-              <SearchBox
-                title="TV"
-                searchData={tvData}
-                hasNextPage={hasTvNextPage}
-                isFetchingNextPage={isFetchingTvNextPage}
-                handleBoxClick={handleBoxClick}
-                fetchNextPage={() => fetchTvNextPage()}
-                mediaType="tv"
-              />
-            )}
-            <AnimatePresence>
-              {openModal && (
-                <Modal
-                  queryName={queryName}
-                  clickedId={clickedId}
-                  movie={selectedMedia}
-                  setShowModal={setOpenModal}
+    <>
+      <title>NEWFLIX | Search</title>
+      <Wrapper>
+        {!isLoading ? (
+          movieData?.pages.length === 0 && tvData?.pages.length === 0 ? (
+            <div>검색결과가 없습니다.</div>
+          ) : (
+            <>
+              {movieData && (
+                <SearchBox
+                  title="MOVIE"
+                  searchData={movieData}
+                  hasNextPage={hasMovieNextPage}
+                  isFetchingNextPage={isFetchingMovieNextPage}
+                  handleBoxClick={handleBoxClick}
+                  fetchNextPage={() => fetchMovieNextPage()}
+                  mediaType="movie"
                 />
               )}
-            </AnimatePresence>
-          </>
-        )
-      ) : (
-        <Loader />
-      )}
-    </Wrapper>
+              {tvData && (
+                <SearchBox
+                  title="TV"
+                  searchData={tvData}
+                  hasNextPage={hasTvNextPage}
+                  isFetchingNextPage={isFetchingTvNextPage}
+                  handleBoxClick={handleBoxClick}
+                  fetchNextPage={() => fetchTvNextPage()}
+                  mediaType="tv"
+                />
+              )}
+              <AnimatePresence>
+                {openModal && (
+                  <Modal
+                    queryName={queryName}
+                    clickedId={clickedId}
+                    movie={selectedMedia}
+                    setShowModal={setOpenModal}
+                  />
+                )}
+              </AnimatePresence>
+            </>
+          )
+        ) : (
+          <Loader />
+        )}
+      </Wrapper>
+    </>
   );
 }

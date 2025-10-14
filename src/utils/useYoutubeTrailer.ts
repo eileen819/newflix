@@ -51,33 +51,6 @@ export function useYoutubeTrailer(opts: IUseYoutubeTrailerProp) {
   }, [detailLoading, trailerId]);
 
   useEffect(() => {
-    /* if (
-      !showPlayer ||
-      !trailerId ||
-      hasPlayed ||
-      !isReady ||
-      !playerRef.current
-    )
-      return;
-    let tries = 0;
-    const iv = setInterval(() => {
-      tries += 1;
-      try {
-        const p = playerRef.current;
-        const state = p.getPlayerState?.();
-        const t = p.getCurrentTime?.();
-        if (state === 1 || (typeof t === "number" && t > 0.05)) {
-          setHasPlayed(true);
-          clearInterval(iv);
-        } else if (tries > 20) {
-          clearInterval(iv);
-        }
-      } catch {
-        clearInterval(iv);
-      }
-    }, 100);
-
-    return () => clearInterval(iv); */
     if (
       !showPlayer ||
       !trailerId ||

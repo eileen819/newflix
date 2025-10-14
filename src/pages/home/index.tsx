@@ -28,38 +28,41 @@ const SlideWrapper = styled.div`
 
 export default function Home() {
   return (
-    <Wrapper>
-      <Banner
-        queryName="movie"
-        queryId="nowPlaying"
-        queryUrl={requests.getNowPlayingMovies}
-      />
-      <SlideWrapper>
-        <Row
-          title="Trending Movies"
+    <>
+      <title>NEWFLIX | Movie</title>
+      <Wrapper>
+        <Banner
           queryName="movie"
-          queryId="trending"
-          queryUrl={requests.getTrendingMovies}
+          queryId="nowPlaying"
+          queryUrl={requests.getNowPlayingMovies}
         />
-        <Row
-          title="Popular Movies"
-          queryName="movie"
-          queryId="popular"
-          queryUrl={requests.getPopularMovies}
-        />
-        <Row
-          title="Upcomig Movies"
-          queryName="movie"
-          queryId="upcoming"
-          queryUrl={requests.getUpcomingMovies}
-        />
-        <Row
-          title="Top Rated Movies"
-          queryName="movie"
-          queryId="topRated"
-          queryUrl={requests.getTopRatedMovies}
-        />
-      </SlideWrapper>
-    </Wrapper>
+        <SlideWrapper>
+          <Row
+            title="Trending Movies"
+            queryName="movie"
+            queryId="trending"
+            queryUrl={requests.getTrendingMovies}
+          />
+          <Row
+            title="Popular Movies"
+            queryName="movie"
+            queryId="popular"
+            queryUrl={requests.getPopularMovies}
+          />
+          <Row
+            title="Upcomig Movies"
+            queryName="movie"
+            queryId="upcoming"
+            queryUrl={requests.getUpcomingMovies}
+          />
+          <Row
+            title="Top Rated Movies"
+            queryName="movie"
+            queryId="topRated"
+            queryUrl={requests.getTopRatedMovies}
+          />
+        </SlideWrapper>
+      </Wrapper>
+    </>
   );
 }
