@@ -1,3 +1,4 @@
+import { device } from "style/media";
 import styled from "styled-components";
 
 const Container = styled.footer`
@@ -7,7 +8,10 @@ const Container = styled.footer`
   gap: 15px;
   padding: 20px 0;
 
-  @media (max-width: 480px) {
+  @media ${device.mobileS} {
+    padding: 10px 20px;
+  }
+  @media ${device.mobileM} {
     padding: 10px 20px;
   }
 `;
@@ -28,7 +32,11 @@ const Div = styled.div`
     font-size: 14px;
     color: ${(props) => props.theme.white.darker};
 
-    @media (max-width: 480px) {
+    @media ${device.mobileS} {
+      font-size: 12px;
+    }
+
+    @media ${device.mobileM} {
       font-size: 12px;
     }
   }
