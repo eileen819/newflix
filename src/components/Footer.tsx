@@ -6,6 +6,10 @@ const Container = styled.footer`
   align-items: center;
   gap: 15px;
   padding: 20px 0;
+
+  @media (max-width: 480px) {
+    padding: 10px 20px;
+  }
 `;
 
 const Title = styled.p`
@@ -23,6 +27,10 @@ const Div = styled.div`
   p {
     font-size: 14px;
     color: ${(props) => props.theme.white.darker};
+
+    @media (max-width: 480px) {
+      font-size: 12px;
+    }
   }
 `;
 
