@@ -8,13 +8,21 @@ const Container = styled.footer`
   padding: 20px 0;
 `;
 
-const Copyright = styled.p`
+const Title = styled.p`
   color: ${(props) => props.theme.white.lighter};
+  font-weight: 400;
 `;
 
 const LinkTo = styled.a`
   span {
     font-size: 25px;
+  }
+`;
+
+const Div = styled.div`
+  p {
+    font-size: 14px;
+    color: ${(props) => props.theme.white.darker};
   }
 `;
 
@@ -28,7 +36,16 @@ export default function Footer() {
 
   return (
     <Container>
-      <Copyright>&copy;{year} Eileen. All rights reserved.</Copyright>
+      <Title>
+        <span>&copy;{year} Newflix</span>
+      </Title>
+      <Div>
+        <p>본 프로젝트는 학습용 데모이며 Netflix와 무관합니다.</p>
+        <p>
+          This product uses the TMDB API but is not endorsed or certified by
+          TMDB.
+        </p>
+      </Div>
       <LinkTo
         href="https://github.com/eileen819"
         target="_blank"
