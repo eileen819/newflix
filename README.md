@@ -1,7 +1,7 @@
 # 📺 NEWFLIX
 
 ![UI Preview](./public/preview.png)
-🔗 **배포 주소:** [NEWFLIX](https://newflix-eileen.vercel.app/)
+🔗 **Demo:** [NEWFLIX](https://newflix-eileen.vercel.app/)
 
   <br/>
 
