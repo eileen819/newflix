@@ -1,6 +1,6 @@
 # 📺 NEWFLIX
 
-사이트 주소와 화면 캡쳐해서 넣기  
+![UI Preview](./public/preview.png)
 🔗 **배포 주소:** [NEWFLIX](https://newflix-eileen.vercel.app/)
 
   <br/>
@@ -97,6 +97,7 @@ api (Vercel Functions(서버리스 API))
  ┃ ┃ ┣ Row.tsx
  ┃ ┃ ┗ rowStyle.tsx
  ┃ ┣ Banner.tsx
+ ┃ ┣ Footer.tsx
  ┃ ┗ Loader.tsx
  ┣ pages
  ┃ ┣ home
@@ -139,7 +140,6 @@ api (Vercel Functions(서버리스 API))
 - Vercel CLI를 이용해 로컬에서 직접 배포할 수 있습니다.
 
 ```bash
-npm run build
 vercel        # Preview 배포
 vercel --prod # Production 배포
 ```
