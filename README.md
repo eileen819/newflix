@@ -1,5 +1,7 @@
 # 📺 NEWFLIX
 
+### 🎬 넷플릭스 스타일로 영화 · TV시리즈를 검색해보세요!
+
 ![UI Preview](./public/preview.png)
 🔗 **Demo:** [NEWFLIX](https://newflix-eileen.vercel.app/)
 
@@ -19,21 +21,21 @@
 ### ✅ 최신 영화 및 TV쇼 정보 제공
 
 - **TMDB API 연동**을 통해 최신 영화/TV쇼 데이터를 실시간 제공
-- `TanStack Query`의 **데이터 캐싱 및 요청 최적화**로 API 호출 횟수 최소화 & 빠른 UX 보장
+- `TanStack Query`의 데이터 캐싱 및 요청 최적화로 API 호출 횟수 최소화 & 빠른 UX 보장
 - `Swiper` 기반 캐러셀 슬라이더를 적용하여 Netflix-style UI 구현
 
 ### ✅ 검색 기능 제공
 
-- 영화 및 TV쇼 **통합 검색 기능** 제공
-- `React-Hook-Form`으로 검색 **폼 상태 관리 및 데이터 유효성 검증**
+- 영화 및 TV쇼 통합 검색 기능 제공
+- `React-Hook-Form`으로 검색 폼 상태 관리 및 데이터 유효성 검증
 - 검색 폼 제출 기반 설계로 불필요한 API 호출 방지
-- `Axios` + `TanStack Query`로 **검색 결과 캐싱 및 로딩 상태를 관리**
+- `Axios` + `TanStack Query`로 검색 결과 캐싱 및 로딩 상태를 관리
 
 ### ✅ 상세 정보 모달 제공
 
-- 선택한 콘텐츠의 **줄거리, 장르, 평점 등의 상세 정보 제공**
-- `Framer Motion`의 `layoutId`로 **부드럽고 직관적인 모달 전환 애니메이션** 구현
-- `React-Youtube`로 **트레일러 자동 재생 지원**, 트레일러 부재 시 공식 이미지로 대체하여 **Fallback UX 강화**
+- 선택한 콘텐츠의 줄거리, 장르, 평점 등의 상세 정보 제공
+- `Framer Motion`의 `layoutId`로 부드럽고 직관적인 모달 전환 애니메이션 구현
+- `React-Youtube`로 트레일러 자동 재생 지원, 트레일러 부재 시 공식 이미지로 대체하여 Fallback UX 강화
 
   <br/>
 
@@ -50,79 +52,46 @@
 
   <br/>
 
-## 🛠️ 사용한 기술 스택
+## 🏗️ 시스템 아키텍처
 
-| 분류                  | 기술/도구                                                                |
-| --------------------- | ------------------------------------------------------------------------ |
-| **Development**       | React, TypeScript, React Router DOM                                      |
-| **State & Data**      | TanStack Query (구 React Query), Axios, React Hook Form                  |
-| **UI & Styling**      | styled-components, styled-reset, Swiper, react-icons                     |
-| **Animation**         | Framer Motion, React-Youtube                                             |
-| **API & Data Source** | TMDB API (The Movie Database)                                            |
-| **Serverless/API**    | Vercel Functions (TMDB 프록시/API Key 보안, 헤더 필터링, 요청 쿼터 제어) |
-| **Deployment**        | Vercel (GitHub 연동 CI/CD, 커밋 기반 자동 배포)                          |
-
-  <br/>
+![Architecture Diagram](./public/architecture.png)  
+ <br/>
 
 ## 📁 프로젝트 구조
 
+> 프로젝트는 서버리스 API 계층과 클라이언트 렌더링 계층으로 명확히 분리된 구조로 설계되었습니다.
+
 ```
-api (Vercel Functions(서버리스 API))
- ┣ getMovieDetails.js
- ┣ getMovieVideo.js
- ┣ getMovies.js
- ┣ getSearchResults.js
- ┣ movieInstance.js
- src
- ┣ @types
- ┃ ┣ swiper.d.ts
- ┃ ┗ youtube.d.ts
- ┣ api (클라이언트 API 요청 모듈)
- ┃ ┣ api.ts
- ┃ ┣ interfaceData.ts
- ┃ ┗ requests.ts
- ┣ components
- ┃ ┣ box
- ┃ ┃ ┣ Box.tsx
- ┃ ┃ ┣ SearchBox.tsx
- ┃ ┃ ┗ boxStyle.tsx
- ┃ ┣ header
- ┃ ┃ ┣ Header.tsx
- ┃ ┃ ┣ SearchBar.tsx
- ┃ ┃ ┗ headerStyle.tsx
- ┃ ┣ modal
- ┃ ┃ ┣ Modal.tsx
- ┃ ┃ ┗ modalStyle.tsx
- ┃ ┣ row
- ┃ ┃ ┣ Row.tsx
- ┃ ┃ ┗ rowStyle.tsx
- ┃ ┣ Banner.tsx
- ┃ ┣ Footer.tsx
- ┃ ┗ Loader.tsx
- ┣ pages
- ┃ ┣ home
- ┃ ┃ ┗ index.tsx
- ┃ ┣ search
- ┃ ┃ ┗ index.tsx
- ┃ ┗ tv
- ┃ ┃ ┗ index.tsx
- ┣ style
- ┃ ┣ GlobalStyle.tsx
- ┃ ┗ media.tsx
- ┣ utils
- ┃ ┣ useCoverPreload.ts
- ┃ ┣ useMediaQuery.ts
- ┃ ┣ useMovieMedia.ts
- ┃ ┣ useWindowDimensions.tsx
- ┃ ┣ useYoutubeTrailer.ts
- ┃ ┗ utils.ts
- ┣ App.tsx
- ┣ Router.tsx
- ┣ main.tsx
- ┣ styled.d.ts
- ┣ theme.ts
- ┗ vite-env.d.ts
+📦 project-root
+├── api/              # Vercel Serverless API (TMDB 프록시 & 보안)
+├── src/
+│   ├── @types/       # 커스텀 타입 정의
+│   ├── api/          # 클라이언트 API 요청 모듈
+│   ├── components/   # UI 컴포넌트 (Box, Row, Modal, Header 등)
+│   ├── pages/        # 페이지 단위 라우팅 (home, tv, search)
+│   ├── style/        # 전역 스타일 & 반응형 설정
+│   ├── utils/        # 커스텀 훅 및 공용 유틸 함수
+│   ├── App.tsx       # 앱 루트
+│   ├── main.tsx      # 진입점
+│   ├── Router.tsx    # React Router 설정
+│   ├── styled.d.ts   # styled-components 타입 선언
+│   └── theme.ts      # 전역 테마 설정
+└── vercel.json       # SPA 라우팅 리라이트 설정
 ```
+
+  <br/>
+
+## 🛠️ 사용한 기술 스택
+
+| 분류                        | 기술/도구                                                                |
+| --------------------------- | ------------------------------------------------------------------------ |
+| **Frontend**                | React, TypeScript, React Router DOM                                      |
+| **State Management & Data** | TanStack Query (구 React Query), Axios, React Hook Form                  |
+| **UI / Styling**            | styled-components, styled-reset, Swiper, react-icons                     |
+| **Animation / Media**       | Framer Motion, React-Youtube                                             |
+| **API Integration**         | TMDB API (The Movie Database)                                            |
+| **Serverless Functions**    | Vercel Functions (TMDB 프록시/API Key 보안, 헤더 필터링, 요청 쿼터 제어) |
+| **CI/CD & Deployment**      | Vercel (GitHub 연동 CI/CD, 커밋 기반 자동 배포)                          |
 
   <br/>
 
@@ -130,14 +99,14 @@ api (Vercel Functions(서버리스 API))
 
 ### 🔹 자동 배포 (권장 방식)
 
-- **Vercel**과 **GitHub 저장소**를 연동하여, main 브랜치에 코드를 push하면 자동으로 CI/CD 파이프라인이 실행됩니다.
+- **Vercel과 GitHub 저장소를 연동**하여, main 브랜치에 코드를 push하면 자동으로 CI/CD 파이프라인이 실행됩니다.
 - `Preview Deploy`와 `Production Deploy` 환경을 분리 운영
   - **Preview**: Pull Request 또는 브랜치 푸시 시 임시 URL이 생성되어 테스트 및 검증 가능
   - **Production**: main 브랜치에 merge되면 자동으로 프로덕션 도메인에 반영
 
 ### 🔹 수동 배포 (CLI)
 
-- Vercel CLI를 이용해 로컬에서 직접 배포할 수 있습니다.
+- **Vercel CLI를 이용해 로컬에서 직접 배포할 수 있습니다.**
 
 ```bash
 vercel        # Preview 배포
@@ -146,7 +115,7 @@ vercel --prod # Production 배포
 
 ### 🖥️ 로컬 실행 방법
 
-1. 프로젝트 클론 & 의존성 설치
+**1. 프로젝트 클론 & 의존성 설치**
 
 ```bash
 # 프로젝트 클론
@@ -157,14 +126,14 @@ cd newflix
 npm install
 ```
 
-2. 개발 서버 실행 (프론트엔드만)
+**2. 개발 서버 실행 (프론트엔드만)**
 
 ```bash
 # Vite 개발 서버 실행
 npm run dev
 ```
 
-3. 프론트엔드 + 서버리스 함수 통합 실행
+**3. 프론트엔드 + 서버리스 함수 통합 실행**
 
 ```bash
 # Vercel CLI 설치 (최초 1회)
@@ -183,7 +152,7 @@ vercel dev
 
 > API Key는 클라이언트에서 직접 노출하지 않고, 서버리스 함수에서만 사용합니다.
 
-4. 빌드 결과 보기
+**4. 빌드 결과 보기**
 
 ```bash
 npm run build
