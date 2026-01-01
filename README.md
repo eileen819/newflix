@@ -21,32 +21,32 @@
 ### ✅ 최신 영화 및 TV쇼 정보 제공
 
 - **TMDB API 연동**을 통해 최신 영화/TV쇼 데이터를 실시간 제공
-- `TanStack Query`의 데이터 캐싱 및 요청 최적화로 API 호출 횟수 최소화 & 빠른 UX 보장
-- `Swiper` 기반 캐러셀 슬라이더를 적용하여 Netflix-style UI 구현
+- TanStack Query의 데이터 캐싱 및 요청 최적화로 API 호출 횟수 최소화 & 빠른 UX 보장
+- Swiper 기반 캐러셀 슬라이더를 적용하여 Netflix-style UI 구현
 
 ### ✅ 검색 기능 제공
 
 - 영화 및 TV쇼 통합 검색 기능 제공
-- `React-Hook-Form`으로 검색 폼 상태 관리 및 데이터 유효성 검증
+- React-Hook-Form으로 검색 폼 상태 관리 및 데이터 유효성 검증
 - 검색 폼 제출 기반 설계로 불필요한 API 호출 방지
-- `Axios` + `TanStack Query`로 검색 결과 캐싱 및 로딩 상태를 관리
+- Axios + TanStack Query로 검색 결과 캐싱 및 로딩 상태를 관리
 
 ### ✅ 상세 정보 모달 제공
 
 - 선택한 콘텐츠의 줄거리, 장르, 평점 등의 상세 정보 제공
-- `Framer Motion`의 `layoutId`로 부드럽고 직관적인 모달 전환 애니메이션 구현
-- `React-Youtube`로 트레일러 자동 재생 지원, 트레일러 부재 시 공식 이미지로 대체하여 Fallback UX 강화
+- Framer Motion의 `layoutId`로 부드럽고 직관적인 모달 전환 애니메이션 구현
+- React-Youtube로 트레일러 자동 재생 지원, 트레일러 부재 시 공식 이미지로 대체하여 Fallback UX 강화
 
   <br/>
 
 ## 🔎 역할과 기여도
 
 - 개인 프로젝트로 **기획부터 설계, 개발, 배포까지 프론트엔드 전 과정을 단독으로 주도**
-- **React + Typescript 기반 아키텍처 설계**로 컴포넌트 재사용성과 유지보수성을 확보
+- **React + TypeScript 기반 아키텍처 설계**로 컴포넌트 재사용성과 유지보수성을 확보
 - **사용자 경험(UX) 최적화**
-  - `TanStack Query` + `Axios`로 **데이터 Fetching & 캐싱 전략 수립** → API 호출 최소화 & 빠른 응답성 확보
-  - `Framer Motion`으로 **자연스러운 모달 전환 및 인터랙션 애니메이션** 구현 → 몰입도 높은 사용자 경험 제공
-  - `Swiper` 기반 **캐러셀 UI** 적용 → Netflix-style 콘텐츠 탐색 경험 구현
+  - TanStack Query + Axios로 **데이터 Fetching & 캐싱 전략 수립** → API 호출 최소화 & 빠른 응답성 확보
+  - Framer Motion으로 **자연스러운 모달 전환 및 인터랙션 애니메이션** 구현 → 몰입도 높은 사용자 경험 제공
+  - Swiper 기반 **캐러셀 UI** 적용 → Netflix-style 콘텐츠 탐색 경험 구현
 - **네트워크 효율 & 보안 강화**: 서버리스 API 래핑으로 API Key 보호 및 안정적 데이터 제공
 - **자동 배포 환경 구축**: Vercel CI/CD 파이프라인을 활용해 커밋 기반 자동 배포 지원
 
@@ -85,7 +85,7 @@
 
 | 분류                        | 기술/도구                                                                |
 | --------------------------- | ------------------------------------------------------------------------ |
-| **Frontend**                | React, Typescript, React Router DOM                                      |
+| **Frontend**                | React, TypeScript, React Router DOM                                      |
 | **State Management & Data** | TanStack Query, Axios, React Hook Form                                   |
 | **UI / Styling**            | styled-components, styled-reset, Swiper, react-icons                     |
 | **Animation / Media**       | Framer Motion, React-Youtube                                             |
@@ -185,12 +185,12 @@ npm run preview
 ### 📍 데이터 Fetching & 성능 최적화
 
 - TanStack Query + Axios로 비동기 데이터 처리와 캐싱 전략을 적용하여 API 호출 최소화 & 사용자 대기 시간 단축
-- useInfiniteQuery 기반 페이지네이션(더보기 버튼) 패턴을 구현 → 대량 콘텐츠를 점진적으로 처리하는 실무적 접근 경험
+- `useInfiniteQuery` 기반 페이지네이션(더보기 버튼) 패턴을 구현 → 대량 콘텐츠를 점진적으로 처리하는 실무적 접근 경험
 
 ### 📍 UI 구성 및 인터랙션
 
 - Swiper로 Netflix-style 대규모 콘텐츠 탐색 UI를 구현하였으며 커스텀 네비게이션 버튼으로 사용자 조작 편의성 강화
-- Framer Motion의 layoutId와 variants를 활용하여 자연스러운 모달 전환 & 직관적 hover 인터랙션 제공
+- Framer Motion의 `layoutId`와 `variants`를 활용하여 자연스러운 모달 전환 & 직관적 `hover` 인터랙션 제공
 - 컴포넌트를 역할 단위로 분리하고 재사용성을 고려한 설계를 경험. 이는 협업 환경에서도 유지보수성과 확장성을 높일 수 있음을 체감
 
 ### 📍 Serverless Function 도입
