@@ -10,7 +10,7 @@
 ## 📌 프로젝트 개요
 
 - **NEWFLIX**는 TMDB API를 활용하여 **최신 영화와 TV쇼 정보를 실시간으로 제공하는 미디어 플랫폼**입니다.
-- Netflix UI/UX를 재해석한 웹 어플리케이션으로, **TanStack Query(구 React-Query)를 통한 캐싱 전략, 반응형 UI, 애니메이션 전환** 등 최신 프론트엔드 실무 기술을 종합적으로 적용하여 최적의 사용자 경험을 제공하는 데 중점을 두었습니다.
+- Netflix UI/UX를 재해석한 웹 어플리케이션으로, **TanStack Query를 통한 캐싱 전략, 반응형 UI, 애니메이션 전환** 등 최신 프론트엔드 실무 기술을 종합적으로 적용하여 최적의 사용자 경험을 제공하는 데 중점을 두었습니다.
 - 특히 **Vercel Functions 기반 서버리스 API 래핑을 통한 보안 강화, Framer Motion을 활용한 자연스러운 모달 전환 애니메이션, Swiper 기반 캐러셀 UI** 등 다양한 기술을 통합하여 **실제 서비스 수준의 인터랙션과 성능을 구현**했습니다.
 - 본 프로젝트는 단순 학습을 넘어, **데이터 페칭 최적화·UX 개선·UI 애니메이션 설계**와 같은 실무 핵심 과제를 직접 해결하며 프론트엔드 개발 역량을 검증했습니다.
 
@@ -42,7 +42,7 @@
 ## 🔎 역할과 기여도
 
 - 개인 프로젝트로 **기획부터 설계, 개발, 배포까지 프론트엔드 전 과정을 단독으로 주도**
-- **React + TypeScript 기반 아키텍처 설계**로 컴포넌트 재사용성과 유지보수성을 확보
+- **React + Typescript 기반 아키텍처 설계**로 컴포넌트 재사용성과 유지보수성을 확보
 - **사용자 경험(UX) 최적화**
   - `TanStack Query` + `Axios`로 **데이터 Fetching & 캐싱 전략 수립** → API 호출 최소화 & 빠른 응답성 확보
   - `Framer Motion`으로 **자연스러운 모달 전환 및 인터랙션 애니메이션** 구현 → 몰입도 높은 사용자 경험 제공
@@ -85,8 +85,8 @@
 
 | 분류                        | 기술/도구                                                                |
 | --------------------------- | ------------------------------------------------------------------------ |
-| **Frontend**                | React, TypeScript, React Router DOM                                      |
-| **State Management & Data** | TanStack Query (구 React Query), Axios, React Hook Form                  |
+| **Frontend**                | React, Typescript, React Router DOM                                      |
+| **State Management & Data** | TanStack Query, Axios, React Hook Form                                   |
 | **UI / Styling**            | styled-components, styled-reset, Swiper, react-icons                     |
 | **Animation / Media**       | Framer Motion, React-Youtube                                             |
 | **API Integration**         | TMDB API (The Movie Database)                                            |
