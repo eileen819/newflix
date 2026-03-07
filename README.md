@@ -2,10 +2,8 @@
 
 ### 🎬 넷플릭스 스타일로 영화 · TV시리즈를 검색해보세요!
 
-![UI Preview](./public/preview.png)
 🔗 **Demo:** [NEWFLIX](https://newflix-eileen.vercel.app/)
-
-  <br/>
+![UI Preview](./public/images/preview_img.png)
 
 ## 📌 프로젝트 개요
 
@@ -17,6 +15,8 @@
   <br/>
 
 ## 💡 주요 기능
+
+![UI Preview](./public/images/ui_preview.png)
 
 ### ✅ 최신 영화 및 TV쇼 정보 제공
 
@@ -54,7 +54,7 @@
 
 ## 🏗️ 시스템 아키텍처
 
-![Architecture Diagram](./public/architecture.png)  
+![Architecture Diagram](./public/images/architecture.png)  
  <br/>
 
 ## 📁 프로젝트 구조
@@ -96,22 +96,6 @@
   <br/>
 
 ## 🚀 배포 방법
-
-### 🔹 자동 배포 (권장 방식)
-
-- **Vercel과 GitHub 저장소를 연동**하여, main 브랜치에 코드를 push하면 자동으로 CI/CD 파이프라인이 실행됩니다.
-- `Preview Deploy`와 `Production Deploy` 환경을 분리 운영
-  - **Preview**: Pull Request 또는 브랜치 푸시 시 임시 URL이 생성되어 테스트 및 검증 가능
-  - **Production**: main 브랜치에 merge되면 자동으로 프로덕션 도메인에 반영
-
-### 🔹 수동 배포 (CLI)
-
-- **Vercel CLI를 이용해 로컬에서 직접 배포할 수 있습니다.**
-
-```bash
-vercel        # Preview 배포
-vercel --prod # Production 배포
-```
 
 ### 🖥️ 로컬 실행 방법
 
@@ -157,6 +141,22 @@ vercel dev
 ```bash
 npm run build
 npm run preview
+```
+
+### 🔹 자동 배포 (권장 방식)
+
+- **Vercel과 GitHub 저장소를 연동**하여, main 브랜치에 코드를 push하면 자동으로 CI/CD 파이프라인이 실행됩니다.
+- `Preview Deploy`와 `Production Deploy` 환경을 분리 운영
+  - **Preview**: Pull Request 또는 브랜치 푸시 시 임시 URL이 생성되어 테스트 및 검증 가능
+  - **Production**: main 브랜치에 merge되면 자동으로 프로덕션 도메인에 반영
+
+### 🔹 수동 배포 (CLI)
+
+- **Vercel CLI를 이용해 로컬에서 직접 배포할 수 있습니다.**
+
+```bash
+vercel        # Preview 배포
+vercel --prod # Production 배포
 ```
 
   <br/>
