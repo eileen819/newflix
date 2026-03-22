@@ -1,7 +1,7 @@
 import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
 import { getSearchResults } from "api/api";
 import SearchBox from "components/box/SearchBox";
-import { Loader } from "components/Loader";
+import { Loader, LoaderWrapper } from "components/Loader";
 import Modal from "components/modal/Modal";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
@@ -157,7 +157,9 @@ export default function SearchPage() {
             </>
           )
         ) : (
-          <Loader />
+          <LoaderWrapper>
+            <Loader />
+          </LoaderWrapper>
         )}
       </Wrapper>
     </>

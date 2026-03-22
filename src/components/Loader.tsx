@@ -24,3 +24,7 @@ export const Loader = styled.div`
   margin: auto;
   z-index: 3;
 `;
+
+export const LoaderWrapper = styled.div`
+  height: 60vh;
+`;
